@@ -5,6 +5,8 @@ const prisma = new Prisma({
 	endpoint: "http://localhost:4466",
 });
 
+export { prisma as default };
+
 // prisma.exists
 // 	.Comment({
 // 		id: "abc123",
@@ -13,26 +15,26 @@ const prisma = new Prisma({
 // 		console.log(exists);
 // 	});
 
-const createPostForUser = async (authorId, data) => {
-	const userExists = await prisma.exists.User({ id: authorId });
-	if (!userExists) {
-		throw new Error("User not found!");
-	}
-	const post = await prisma.mutation.createPost(
-		{
-			data: {
-				...data,
-				author: {
-					connect: {
-						id: authorId,
-					},
-				},
-			},
-		},
-		"{ author { id name email posts { id title published }} }"
-	);
-	return post.author;
-};
+// const createPostForUser = async (authorId, data) => {
+// 	const userExists = await prisma.exists.User({ id: authorId });
+// 	if (!userExists) {
+// 		throw new Error("User not found!");
+// 	}
+// 	const post = await prisma.mutation.createPost(
+// 		{
+// 			data: {
+// 				...data,
+// 				author: {
+// 					connect: {
+// 						id: authorId,
+// 					},
+// 				},
+// 			},
+// 		},
+// 		"{ author { id name email posts { id title published }} }"
+// 	);
+// 	return post.author;
+// };
 
 // createPostForUser("ckac1rry60009084441n85jwm", {
 // 	title: "React Native Course v2",
