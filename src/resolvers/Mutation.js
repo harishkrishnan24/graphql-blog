@@ -1,5 +1,3 @@
-import uuidv4 from "uuid/v4";
-
 const Mutation = {
 	async createUser(parent, args, { prisma }, info) {
 		const emailTaken = await prisma.exists.User({ email: args.data.email });
